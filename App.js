@@ -19,6 +19,26 @@ sections.forEach(section => {
         }
     })
     //assunto de clicar na foto e deixar active quando windows 1024
+    
+        if (window.innerWidth >= 1024) {
+            let photos = section.querySelectorAll('.photos > div');
+            let dots = section.querySelectorAll('pagination span');
+
+            const activeThumb = (current) =>{
+                section.querySelector('.photos > .active').classList.remove('active');
+                current.classList.add('active');
+            }
+            photos.forEach((photo, i) => {
+                photo.addEventListener('click', () =>{
+                    activeThumb(photo);
+                    dots[i].click();
+                })
+            })
+
+            swiper.on('realIndexChange', (swiper) => {
+                activeThumb(photos[swiper.realIndex]);
+            })
+        }
 
     //card animation
     const activeSection = () => {
